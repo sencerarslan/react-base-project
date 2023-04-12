@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const WideScreenLayoutStyled = styled.div`
+export const BaseLayoutStyled = styled.div`
   .ant-layout-content {
     overflow: auto !important;
   }
