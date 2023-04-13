@@ -1,4 +1,8 @@
 {
+  "navigate": {
+    "home": "Home",
+    "about": "About"
+  },
   "homepage": {
     "desc": {
       "first": "Hello Again"

@@ -1,4 +1,8 @@
 {
+  "navigate": {
+    "home": "Anasayfa",
+    "about": "Hakkımızda"
+  },
   "homepage": {
     "desc": {
       "first": "Merhaba Hosgeldiniz"

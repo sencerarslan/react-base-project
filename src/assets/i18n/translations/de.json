@@ -1,4 +1,8 @@
 {
+  "navigate": {
+    "home": "Heim",
+    "about": "Über uns"
+  },
   "homepage": {
     "desc": {
       "first": "Willkommen"
