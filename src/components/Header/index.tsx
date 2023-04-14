@@ -67,7 +67,8 @@ function Header() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
-            }}>
+            }}
+          >
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
@@ -77,7 +78,8 @@ function Header() {
                 onClick={() => {
                   navigate(`/${i18n.language}${item.link}`);
                 }}
-                sx={{ my: 2, color: "white", display: "block" }}>
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
                 {item.title}
               </Button>
             ))}
@@ -85,16 +87,13 @@ function Header() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Select Language">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <IconButton
-                  style={{ color: "white" }}
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  color="inherit">
-                  <LanguageIcon />
-                </IconButton>
+              <IconButton
+                onClick={handleOpenUserMenu}
+                sx={{ p: 0 }}
+                style={{ color: "white" }}
+                size="large"
+              >
+                <LanguageIcon />
               </IconButton>
             </Tooltip>
             <Menu
@@ -113,16 +112,19 @@ function Header() {
               open={Boolean(anchorElUser)}
               onClose={() => {
                 setAnchorElUser(null);
-              }}>
+              }}
+            >
               {settings.map((lng) => (
                 <MenuItem
                   key={lng}
                   onClick={() => {
                     handleCloseUserMenu(lng);
-                  }}>
+                  }}
+                >
                   <Typography
                     textAlign="center"
-                    style={{ fontWeight: language === lng ? "bold" : "300" }}>
+                    style={{ fontWeight: language === lng ? "bold" : "300" }}
+                  >
                     {lng.toUpperCase()}
                   </Typography>
                 </MenuItem>
