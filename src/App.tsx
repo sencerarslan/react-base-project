@@ -15,7 +15,7 @@ function App() {
     } else {
       navigate(routesPaths.base);
     }
-  });
+  }, []);
   return (
     <div className="App">
       <AppRoutes />

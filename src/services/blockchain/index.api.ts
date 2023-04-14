@@ -1,8 +1,8 @@
-import { axiosClient, axiosClient2 } from "../";
+import { axiosClient } from "../";
 
 export function getProduct() {
   return axiosClient.get("/posts");
 }
 export function postProduct(id: number) {
-  return axiosClient2.get("/posts/" + id);
+  return axiosClient.get("/posts/" + id);
 }

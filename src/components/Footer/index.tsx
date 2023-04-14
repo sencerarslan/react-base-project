@@ -16,7 +16,7 @@ function Footer() {
   const pages = [
     {
       title: t("navigate.home"),
-      link: routesPaths.public.home,
+      link: routesPaths.base,
     },
     {
       title: t("navigate.about"),
