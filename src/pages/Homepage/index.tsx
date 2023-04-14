@@ -11,16 +11,14 @@ import postsService from "../../services/blockchain/index.api";
 
 import { useCallback, useEffect, useState } from "react";
 
-
-
 export interface HomePageProps {}
 
 const HomePage = () => {
   const [data, setData] = useState<any>([]);
 
-const getDatas = async () => {
+  const getDatas = async () => {
     await postsService.getProduct().then(function (response) {
-      console.log("all", response.data);
+      console.log("alll", response.data);
       setData(response.data);
     });
     await postsService.postProduct(1).then(function (response) {
@@ -28,13 +26,9 @@ const getDatas = async () => {
     });
   };
 
-
-
   useEffect(() => {
     getDatas();
   }, []);
-
-
 
   return (
     <HomePageStyled>
