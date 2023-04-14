@@ -56,7 +56,9 @@ const RouteComposer = ({ route, before, ...restProps }: RouteComposerProps) => {
       callbackValue = await before();
     }
     setInitValue(callbackValue);
-    setReady(true);
+    setTimeout(() => {
+      setReady(true);
+    }, 300);
   }, [before]);
 
   useEffect(() => {
@@ -68,8 +70,7 @@ const RouteComposer = ({ route, before, ...restProps }: RouteComposerProps) => {
       {ready ? (
         <Guard
           guardCondition={route?.guardCondition}
-          redirect={route?.redirect}
-        >
+          redirect={route?.redirect}>
           <Layout className={rootClassName}>
             <Component {...restProps} initValue={initValue} />
           </Layout>
@@ -85,30 +86,15 @@ const RouteComposer = ({ route, before, ...restProps }: RouteComposerProps) => {
 export const renderRoutes = (routes: AppRoute[]) =>
   routes ? (
     <Routes>
-      <Route
-        key={"/"}
-        path={"/"}
-        index={routes[0]?.exact}
-        element={
-          <RouteComposer
-            before={routes[0]?.before}
-            route={{
-              component: routes[0].component,
-              layout: routes[0].layout,
-              guard: routes[0].guard,
-              redirect: routes[0].redirect,
-              guardCondition: routes[0].guardCondition,
-              className: routes[0].className,
-            }}
-          />
-        }
-      />
-
       {routes.map((route) => {
         return (
           <Route
             key={route.path}
-            path={`/:locale${route.path}`}
+            path={
+              route.path === "/" || route.path === "*"
+                ? route.path
+                : `/:locale${route.path}`
+            }
             index={route?.exact}
             element={
               <RouteComposer

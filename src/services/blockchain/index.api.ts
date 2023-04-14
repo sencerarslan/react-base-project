@@ -11,3 +11,4 @@ class PostsService {
 const postsService = new PostsService();
 
 export default postsService;
+
