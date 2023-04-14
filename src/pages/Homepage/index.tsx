@@ -9,20 +9,21 @@ import Paper from "@mui/material/Paper";
 
 import postsService from "../../services/blockchain/index.api";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { routesPaths } from "../../config/routes";
+import i18n from "../../assets/i18n";
 
 export interface HomePageProps {}
 
 const HomePage = () => {
   const [data, setData] = useState<any>([]);
+  const navigate = useNavigate();
 
   const getDatas = async () => {
     await postsService.getProduct().then(function (response) {
       console.log("alll", response.data);
       setData(response.data);
-    });
-    await postsService.postProduct(1).then(function (response) {
-      console.log("tek", response.data);
     });
   };
 
@@ -43,6 +44,12 @@ const HomePage = () => {
           <TableBody>
             {data.map((row: any) => (
               <TableRow
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  navigate(
+                    `/${i18n.language}${routesPaths.public.detail}/${row.id}`
+                  );
+                }}
                 key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                 <TableCell component="th" scope="row">

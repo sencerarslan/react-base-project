@@ -3,7 +3,7 @@ class PostsService {
   async getProduct() {
     return axiosClient.get("/posts");
   }
-  async postProduct(id: number) {
+  async postProduct(id: string) {
     return axiosClient.get("/posts/" + id);
   }
 }
@@ -11,4 +11,3 @@ class PostsService {
 const postsService = new PostsService();
 
 export default postsService;
-
