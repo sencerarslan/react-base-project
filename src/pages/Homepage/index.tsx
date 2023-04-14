@@ -11,16 +11,16 @@ import postsService from "../../services/blockchain/index.api";
 
 import { useCallback, useEffect, useState } from "react";
 
-
-
 export interface HomePageProps {}
 
 const HomePage = () => {
   const [data, setData] = useState<any>([]);
 
-const getDatas = async () => {
+  const getDatas = async () => {
     await postsService.getProduct().then(function (response) {
-      console.log("all", response.data);
+      console.log("allsdsad", response.data);
+      console.log("tek");
+
       setData(response.data);
     });
     await postsService.postProduct(1).then(function (response) {
@@ -28,13 +28,9 @@ const getDatas = async () => {
     });
   };
 
-
-
   useEffect(() => {
     getDatas();
   }, []);
-
-
 
   return (
     <HomePageStyled>
@@ -50,7 +46,8 @@ const getDatas = async () => {
             {data.map((row: any) => (
               <TableRow
                 key={row.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
                 <TableCell component="th" scope="row">
                   {row.title}
                 </TableCell>
