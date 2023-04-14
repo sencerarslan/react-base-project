@@ -3,7 +3,7 @@ class PostsService {
   async getProduct() {
     return axiosClient.get("/users");
   }
-  async postProduct(id: number) {
+  async postProduct(id: string) {
     return axiosClient.get("/posts/" + id);
   }
 }

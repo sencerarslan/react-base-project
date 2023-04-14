@@ -7,6 +7,7 @@ export const routesPaths = {
   base: "/",
   public: {
     about: "/about",
+    detail: "/detail",
   },
 };
 export const appRoutes: AppRoute[] = [
@@ -15,6 +16,12 @@ export const appRoutes: AppRoute[] = [
     path: routesPaths.base,
     layout: BaseLayout,
     component: lazy(() => import("../pages/Homepage/")),
+  },
+  {
+    exact: true,
+    path: `${routesPaths.public.detail}/:id`,
+    layout: BaseLayout,
+    component: lazy(() => import("../pages/Detail/")),
   },
   {
     exact: true,
