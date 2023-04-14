@@ -8,21 +8,25 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useEffect, useState } from "react";
-import { getProduct, postProduct } from "../../services/blockchain/index.api";
+import postsService from "../../services/blockchain/index.api";
 
 export interface HomePageProps {}
 
 const HomePage = () => {
   const [data, setData] = useState<any>([]);
 
-  useEffect(() => {
-    getProduct().then(function (response) {
-      console.log(response.data);
+  const getDatas = async () => {
+    await postsService.getProduct().then(function (response) {
+      console.log("all", response.data);
       setData(response.data);
     });
-    postProduct(1).then(function (response) {
-      console.log(response.data);
+    await postsService.postProduct(1).then(function (response) {
+      console.log("tek", response.data);
     });
+  };
+
+  useEffect(() => {
+    getDatas();
   }, []);
 
   return (
@@ -39,7 +43,8 @@ const HomePage = () => {
             {data.map((row: any) => (
               <TableRow
                 key={row.userId}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
                 <TableCell component="th" scope="row">
                   {row.title}
                 </TableCell>
