@@ -56,7 +56,9 @@ const RouteComposer = ({ route, before, ...restProps }: RouteComposerProps) => {
       callbackValue = await before();
     }
     setInitValue(callbackValue);
-    setReady(true);
+    setTimeout(() => {
+      setReady(true);
+    }, 300);
   }, [before]);
 
   useEffect(() => {
