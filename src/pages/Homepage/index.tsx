@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 
 import postsService from "../../services/blockchain/index.api";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface HomePageProps {}
 
@@ -44,9 +44,10 @@ const HomePage = () => {
             {data.map((row: any) => (
               <TableRow
                 key={row.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
                 <TableCell component="th" scope="row">
-                  {row.title}
+                  {row.name}
                 </TableCell>
                 <TableCell align="right">{row.id}</TableCell>
               </TableRow>
