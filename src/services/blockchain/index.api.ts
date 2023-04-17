@@ -1,10 +1,10 @@
 import { axiosClient } from "../";
 class PostsService {
-  async getProduct() {
-    return axiosClient.get("/users");
+  async getAllGames() {
+    return axiosClient.get("/games");
   }
   async postProduct(id: string) {
-    return axiosClient.get("/posts/" + id);
+    return axiosClient.get("/users/" + id);
   }
 }
 

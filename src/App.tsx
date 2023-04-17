@@ -4,7 +4,7 @@ import AppRoutes from "../src/components/app-routes";
 import { useLocation, useNavigate } from "react-router-dom";
 import i18n, { languages } from "./assets/i18n";
 import { routesPaths } from "./config/routes";
-
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -16,10 +16,21 @@ function App() {
       navigate(routesPaths.base);
     }
   }, []);
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#FA8305",
+      },
+    },
+  });
+
   return (
-    <div className="App">
-      <AppRoutes />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <AppRoutes />
+      </div>
+    </ThemeProvider>
   );
 }
 

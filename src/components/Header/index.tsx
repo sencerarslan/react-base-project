@@ -49,15 +49,19 @@ function Header() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="transparent">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "flex", md: "flex" }, mr: 1 }} />
+          <AdbIcon
+            sx={{ display: { xs: "flex", md: "flex" }, mr: 1 }}
+            color="primary"
+          />
           <Typography
             variant="h6"
             noWrap
             component="a"
             href="/"
+            color="primary"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "flex" },
@@ -65,7 +69,7 @@ function Header() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+
               textDecoration: "none",
             }}
           >

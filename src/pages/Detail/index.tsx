@@ -39,10 +39,11 @@ const DetailPage = () => {
             {data && (
               <TableRow
                 key={data.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
                 <TableCell component="th" scope="row">
-                  <h3>{data.title}</h3>
-                  {data.body}
+                  <h3>{data.name}</h3>
+                  {data.email}
                 </TableCell>
               </TableRow>
             )}
