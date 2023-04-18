@@ -38,23 +38,17 @@ const HomePage = () => {
 
   return (
     <HomePageStyled>
-      <Masonry columns={3} spacing={3} key={Math.random()}>
+      <Masonry className="media" columns={4} spacing={6} key={Math.random()}>
         {userData.map((item: any, index: any) => (
           <Card className="card" key={index}>
             <CardMedia
-              sx={{ height: 206 }}
               image={item.thumbnail}
               title={item.title}
+              className="image"
             />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {item.developer}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {item.short_description}
-              </Typography>
-            </CardContent>
-            <CardActions>
+
+            <div>{item.developer}</div>
+            {/* <CardActions>
               <Button
                 size="small"
                 onClick={() => {
@@ -71,7 +65,7 @@ const HomePage = () => {
               >
                 Learn More
               </Button>
-            </CardActions>
+            </CardActions> */}
           </Card>
         ))}
       </Masonry>
