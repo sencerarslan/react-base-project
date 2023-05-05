@@ -15,13 +15,13 @@ export const appRoutes: AppRoute[] = [
     exact: true,
     path: routesPaths.base,
     layout: BaseLayout,
-    component: lazy(() => import("../pages/Homepage/")),
+    component: lazy(() => import("../pages/Homepage")),
   },
   {
     exact: true,
     path: `${routesPaths.public.detail}/:id`,
     layout: BaseLayout,
-    component: lazy(() => import("../pages/Detail/")),
+    component: lazy(() => import("../pages/Detail")),
   },
   {
     exact: true,

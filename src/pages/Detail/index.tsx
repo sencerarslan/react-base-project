@@ -1,16 +1,10 @@
 import { DetailPageStyled } from "./index.styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-
 import postsService from "../../services/blockchain/index.api";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Card, CardMedia } from "@mui/material";
+import Masonry from "@mui/lab/Masonry";
 
 export interface DetailPageProps {}
 
@@ -33,23 +27,24 @@ const DetailPage = () => {
 
   return (
     <DetailPageStyled>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableBody>
-            {data && (
-              <TableRow
-                key={data.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  <h3>{data.name}</h3>
-                  {data.email}
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Masonry className="media" columns={1} spacing={6} key={Math.random()}>
+        {data && (
+          <Card className="card" key={data.id}>
+            <div
+              className="bg"
+              style={{ backgroundImage: `url('${data.thumbnail}')` }}></div>
+            <CardMedia
+              image={data.thumbnail}
+              title={data.title}
+              className="image"
+            />
+            <h3
+              className="title"
+              dangerouslySetInnerHTML={{ __html: data.title }}></h3>
+            <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
+          </Card>
+        )}
+      </Masonry>
     </DetailPageStyled>
   );
 };

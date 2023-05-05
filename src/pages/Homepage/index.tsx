@@ -4,18 +4,12 @@ import postsService from "../../services/blockchain/index.api";
 
 import { useSelector, useDispatch } from "react-redux";
 import { saveItems } from "../../store/reducers/userReducer";
-// import Button from "@mui/material/Button";
 import { useEffect } from "react";
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
+import { Card, CardMedia } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Masonry from "@mui/lab/Masonry";
+import { routesPaths } from "../../config/routes";
+import i18n from "../../assets/i18n";
 
 export interface HomePageProps {}
 
@@ -40,7 +34,14 @@ const HomePage = () => {
     <HomePageStyled>
       <Masonry className="media" columns={4} spacing={6} key={Math.random()}>
         {userData.map((item: any, index: any) => (
-          <Card className="card" key={index}>
+          <Card
+            className="card"
+            key={index}
+            onClick={() => {
+              navigate(
+                `/${i18n.language}${routesPaths.public.detail}/${item.id}`
+              );
+            }}>
             <CardMedia
               image={item.thumbnail}
               title={item.title}
@@ -48,38 +49,9 @@ const HomePage = () => {
             />
 
             <div>{item.developer}</div>
-            {/* <CardActions>
-              <Button
-                size="small"
-                onClick={() => {
-                  navigate(item.game_url);
-                }}
-              >
-                See Profile
-              </Button>
-              <Button
-                size="small"
-                onClick={() => {
-                  navigate(item.profile_url);
-                }}
-              >
-                Learn More
-              </Button>
-            </CardActions> */}
           </Card>
         ))}
       </Masonry>
-
-      {/* <div>
-        <Button
-          color="primary"
-          onClick={() => {
-            getDatas();
-          }}
-        >
-          Çek
-        </Button>
-      </div> */}
     </HomePageStyled>
   );
 };

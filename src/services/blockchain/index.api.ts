@@ -4,7 +4,7 @@ class PostsService {
     return axiosClient.get("/games");
   }
   async postProduct(id: string) {
-    return axiosClient.get("/users/" + id);
+    return axiosClient.get("/game?id=" + id);
   }
 }
 
