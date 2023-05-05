@@ -41,7 +41,23 @@ const DetailPage = () => {
             <h3
               className="title"
               dangerouslySetInnerHTML={{ __html: data.title }}></h3>
+            <small>{data.platform} </small>
             <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
+            <div className="minimum_system_requirements">
+              <h4>Minimum System Requirements</h4>
+              <ul>
+                {Object.keys(data.minimum_system_requirements).map(
+                  (item: any, index: any) => {
+                    return (
+                      <li>
+                        <strong>{item} :</strong>{" "}
+                        {data.minimum_system_requirements[item]}
+                      </li>
+                    );
+                  }
+                )}
+              </ul>
+            </div>
           </Card>
         )}
       </Masonry>

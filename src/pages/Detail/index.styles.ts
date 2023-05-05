@@ -46,6 +46,16 @@ export const DetailPageStyled = styled.div`
       font-size: 22px;
       font-weight: 700;
       color: #fa8305;
+      & + small {
+        background-color: #35d77c;
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-weight: 600;
+        margin: auto;
+        margin-bottom: 30px;
+        display: block;
+        width: fit-content;
+      }
     }
   }
   .media {
@@ -59,6 +69,12 @@ export const DetailPageStyled = styled.div`
         margin-bottom: 50px;
         border-radius: 16px;
       }
+    }
+  }
+  .minimum_system_requirements {
+    text-align: left;
+    strong {
+      text-transform: capitalize;
     }
   }
 `;
