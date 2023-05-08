@@ -1,44 +1,89 @@
-import * as React from "react";
+import React, { useState } from "react";
+import { Button, FormControl, TextField, Typography } from "@mui/material";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { PageStyled } from "./index.styles";
-import { Button, TextField, Box, Container } from "@mui/material";
 
-function ContactForm() {
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  message: Yup.string().required("Message is required"),
+});
+
+const initialValues = {
+  name: "",
+  email: "",
+  message: "",
+};
+
+const ContactForm = () => {
+  const [formState, setFormState] = useState<boolean>(true);
+  const handleSubmit = (values: typeof initialValues) => {
+    console.log(values);
+    setFormState(false);
+    setTimeout(() => {
+      setFormState(true);
+    }, 3000);
+  };
+
   return (
     <PageStyled>
-      <Container maxWidth="xl">
-        <Box
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
-          }}
-          noValidate
-          autoComplete="off">
-          <div>
-            <TextField
-              type="text"
-              defaultValue=""
-              label="Adınız Soyadınız"
-              variant="filled"
-            />
-            <TextField
-              type="email"
-              defaultValue=""
-              label="E-posta Adresi"
-              variant="filled"
-            />
-          </div>
-        </Box>
-        <Button
-          aria-label="send"
-          variant="contained"
-          typeof="button"
-          onClick={() => {
-            alert("Formunuz tarafımıza başarılı bir şekilde gönderildi!");
-          }}>
-          Send
-        </Button>
-      </Container>
+      <Typography variant="h4" gutterBottom>
+        Contact Us
+      </Typography>
+      {formState ? (
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          validationSchema={validationSchema}>
+          {({ dirty, isValid }) => (
+            <Form>
+              <Field
+                name="name"
+                as={TextField}
+                label="Name"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                error={dirty && !isValid}
+                helperText={<ErrorMessage name="name" />}
+              />
+              <Field
+                name="email"
+                as={TextField}
+                label="Email"
+                type="email"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                error={dirty && !isValid}
+                helperText={<ErrorMessage name="email" />}
+              />
+              <Field
+                name="message"
+                as={TextField}
+                label="Message"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                multiline
+                rows={4}
+                error={dirty && !isValid}
+                helperText={<ErrorMessage name="message" />}
+              />
+              <FormControl margin="normal" fullWidth>
+                <Button variant="contained" color="primary" type="submit">
+                  Submit
+                </Button>
+              </FormControl>
+            </Form>
+          )}
+        </Formik>
+      ) : (
+        <h3>Thank you for your message!</h3>
+      )}
     </PageStyled>
   );
-}
+};
+
 export default ContactForm;

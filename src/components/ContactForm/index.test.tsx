@@ -1,37 +1,38 @@
-import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { render, screen, fireEvent } from "@testing-library/react";
 import ContactForm from ".";
 
-const setup = () => {
-  const utils = render(<ContactForm />);
+describe("ContactForm", () => {
+  test("renders a contact form", () => {
+    render(<ContactForm />);
+    expect(screen.getByText("Contact Us")).toBeInTheDocument();
+    expect(screen.getByLabelText("Name")).toBeInTheDocument();
+    expect(screen.getByLabelText("Email")).toBeInTheDocument();
+    expect(screen.getByLabelText("Message")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Submit" })).toBeInTheDocument();
+  });
 
-  // Data
-  const data = {
-    name: "Sencer",
-    email: "m.sencerarslan@gmail.com",
-  };
+  test("validates the form and displays errors", async () => {
+    render(<ContactForm />);
+    fireEvent.click(screen.getByRole("button", { name: "Submit" }));
+    expect(await screen.findByText("Name is required")).toBeInTheDocument();
+    expect(await screen.findByText("Email is required")).toBeInTheDocument();
+    expect(await screen.findByText("Message is required")).toBeInTheDocument();
+  });
 
-  // Form Element
-  const name = screen.getByLabelText("Adınız Soyadınız") as HTMLInputElement;
-  const email = screen.getByLabelText("E-posta Adresi") as HTMLInputElement;
-
-  return {
-    data,
-    name,
-    email,
-    ...utils,
-  };
-};
-
-test("Contact Form Test Method", async () => {
-  const { data, name, email } = setup();
-
-  // Set Data
-  fireEvent.change(name, { target: { value: data.name } });
-  fireEvent.change(email, { target: { value: data.email } });
-
-  // Control
-  expect(name.value).toBe(data.name);
-  expect(email.value).toBe(data.email);
+  test("submits the form with valid data", async () => {
+    render(<ContactForm />);
+    fireEvent.input(screen.getByLabelText("Name"), {
+      target: { value: "John Doe" },
+    });
+    fireEvent.input(screen.getByLabelText("Email"), {
+      target: { value: "john.doe@example.com" },
+    });
+    fireEvent.input(screen.getByLabelText("Message"), {
+      target: { value: "Hello World!" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Submit" }));
+    expect(
+      await screen.findByText("Thank you for your message!")
+    ).toBeInTheDocument();
+  });
 });
