@@ -2,6 +2,22 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import ContactForm from ".";
 
 describe("ContactForm", () => {
+  const { parseWithComments } = require("jest-docblock");
+  test("Console Test", () => {
+    const code = `
+    /**
+     * This is a sample
+     *
+     * @flow
+     */
+
+    console.log('Hello World!');
+    `;
+    const parsed = parseWithComments(code);
+
+    // prints an object with two attributes: comments and pragmas.
+    console.log(parsed);
+  });
   test("renders a contact form", () => {
     render(<ContactForm />);
     expect(screen.getByText("Contact Us")).toBeInTheDocument();
