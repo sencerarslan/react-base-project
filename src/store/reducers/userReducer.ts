@@ -23,7 +23,5 @@ const userSlice = createSlice({
   },
 });
 
-console.log(userSlice);
-
 export const { saveItems, clearItems } = userSlice.actions;
 export default userSlice.reducer;

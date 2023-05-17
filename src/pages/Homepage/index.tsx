@@ -1,57 +1,100 @@
+import {
+  Autocomplete,
+  Grid,
+  InputAdornment,
+  autocompleteClasses,
+} from "@mui/material";
+import { CustomInput } from "../../components/Input";
 import { HomePageStyled } from "./index.styles";
-
-import postsService from "../../services/blockchain/index.api";
-
-import { useSelector, useDispatch } from "react-redux";
-import { saveItems } from "../../store/reducers/userReducer";
-import { useEffect } from "react";
-import { Card, CardMedia } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import Masonry from "@mui/lab/Masonry";
-import { routesPaths } from "../../config/routes";
-import i18n from "../../assets/i18n";
+import { FlightTakeoff, FlightLand, PersonAdd } from "@mui/icons-material";
+import { CustomDatePicker } from "../../components/DatePicker";
 
 export interface HomePageProps {}
 
 const HomePage = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { userData } = useSelector((state: any) => state.user);
-
-  const getDatas = async () => {
-    await postsService.getAllGames().then(function (response) {
-      console.log("response", response);
-
-      dispatch(saveItems(response.data));
-    });
-  };
-  useEffect(() => {
-    getDatas();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const data2 = [
+    { label: "İzmir" },
+    { label: "İstanbul" },
+    { label: "Ankara" },
+  ];
 
   return (
     <HomePageStyled>
-      <Masonry className="media" columns={4} spacing={6} key={Math.random()}>
-        {userData.map((item: any, index: any) => (
-          <Card
-            className="card"
-            key={index}
-            onClick={() => {
-              navigate(
-                `/${i18n.language}${routesPaths.public.detail}/${item.id}`
-              );
-            }}>
-            <CardMedia
-              image={item.thumbnail}
-              title={item.title}
-              className="image"
+      <>
+        <Grid container>
+          <Grid p={2}>
+            <Autocomplete
+              popupIcon={
+                <InputAdornment position="end">
+                  <FlightTakeoff fontSize="small" />
+                </InputAdornment>
+              }
+              options={data2}
+              sx={{
+                width: 156,
+                [`& .${autocompleteClasses.popupIndicator}`]: {
+                  transform: "none",
+                },
+              }}
+              renderInput={(params) => (
+                <CustomInput {...params} label="Nereden" size="small" />
+              )}
             />
-
-            <div>{item.developer}</div>
-          </Card>
-        ))}
-      </Masonry>
+          </Grid>
+          <Grid p={2}>
+            <Autocomplete
+              popupIcon={
+                <InputAdornment position="end">
+                  <FlightLand fontSize="small" />
+                </InputAdornment>
+              }
+              options={data2}
+              sx={{
+                width: 156,
+                [`& .${autocompleteClasses.popupIndicator}`]: {
+                  transform: "none",
+                },
+              }}
+              renderInput={(params) => (
+                <CustomInput {...params} label="Nereye" size="small" />
+              )}
+            />
+          </Grid>
+          <Grid p={2}>
+            <CustomDatePicker
+              label="Gidiş Tarihi"
+              slotProps={{
+                textField: { size: "small" },
+                openPickerButton: { size: "small" },
+              }}
+            />
+          </Grid>
+          <Grid p={2}>
+            <CustomDatePicker
+              label="Dönüş Tarihi"
+              slotProps={{
+                textField: { size: "small" },
+                openPickerButton: { size: "small" },
+              }}
+            />
+          </Grid>
+          <Grid p={2}>
+            <CustomInput
+              type="number"
+              style={{ maxWidth: "156px" }}
+              size="small"
+              label="Yolcu Sayısı"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <PersonAdd fontSize="small" />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
+        </Grid>
+      </>
     </HomePageStyled>
   );
 };

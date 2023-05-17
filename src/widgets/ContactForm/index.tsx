@@ -19,7 +19,6 @@ const initialValues = {
 const ContactForm = () => {
   const [formState, setFormState] = useState<boolean>(true);
   const handleSubmit = (values: typeof initialValues) => {
-    console.log(values);
     setFormState(false);
     setTimeout(() => {
       setFormState(true);

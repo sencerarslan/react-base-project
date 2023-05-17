@@ -1,140 +1,34 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import LanguageIcon from "@mui/icons-material/Language";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import { useNavigate } from "react-router-dom";
-import { routesPaths } from "../../config/routes";
-import { useState } from "react";
-import i18n from "../../assets/i18n";
-import { useTranslation } from "react-i18next";
+import {
+  AppBar,
+  Toolbar,
+  Container,
+  IconButton,
+  useTheme,
+} from "@mui/material";
+import React from "react";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { ColorModeContext } from "../../App";
 
 function Header() {
-  const settings = ["tr", "en", "de"];
-  const { t } = useTranslation();
-  const pages = [
-    {
-      title: t("navigate.home"),
-      link: routesPaths.base,
-    },
-    {
-      title: t("navigate.about"),
-      link: routesPaths.public.about,
-    },
-  ];
-  const [language, setLanguage] = useState<string>(i18n.language);
-  const navigate = useNavigate();
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
-
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = (lang: any) => {
-    i18n.changeLanguage(lang);
-    setLanguage(lang);
-    setTimeout(() => {
-      window.localStorage.setItem("currentLang", lang);
-    });
-  };
-
+  const theme = useTheme();
+  const colorMode = React.useContext(ColorModeContext);
   return (
-    <AppBar position="static" color="transparent">
+    <AppBar position="static" color="primary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon
-            sx={{ display: { xs: "flex", md: "flex" }, mr: 1 }}
-            color="primary"
-          />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            color="primary"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "flex" },
-              flexGrow: { xs: 1, md: 0 },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
+          <div>HEADER</div>
 
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((item: any, index: number) => (
-              <Button
-                key={index}
-                onClick={() => {
-                  navigate(`/${i18n.language}${item.link}`);
-                }}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {item.title}
-              </Button>
-            ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Select Language">
-              <IconButton
-                onClick={handleOpenUserMenu}
-                sx={{ p: 0 }}
-                style={{ color: "white" }}
-                size="large"
-              >
-                <LanguageIcon />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={() => {
-                setAnchorElUser(null);
-              }}
-            >
-              {settings.map((lng) => (
-                <MenuItem
-                  key={lng}
-                  onClick={() => {
-                    handleCloseUserMenu(lng);
-                  }}
-                >
-                  <Typography
-                    textAlign="center"
-                    style={{ fontWeight: language === lng ? "bold" : "300" }}
-                  >
-                    {lng.toUpperCase()}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          <IconButton
+            sx={{ ml: 1 }}
+            onClick={colorMode.toggleColorMode}
+            color="inherit">
+            {theme.palette.mode === "dark" ? (
+              <Brightness7Icon />
+            ) : (
+              <Brightness4Icon />
+            )}
+          </IconButton>
         </Toolbar>
       </Container>
     </AppBar>

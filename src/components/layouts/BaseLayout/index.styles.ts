@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const BaseLayoutStyled = styled.div`
-  background-color: #050301;
   .page {
     display: flex;
     flex-wrap: nowrap;

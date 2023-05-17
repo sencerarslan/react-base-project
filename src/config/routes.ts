@@ -6,8 +6,7 @@ import ErrorPage from "../pages/ErrorPage";
 export const routesPaths = {
   base: "/",
   public: {
-    about: "/about",
-    detail: "/detail",
+    // detail: "/detail",
   },
 };
 export const appRoutes: AppRoute[] = [
@@ -17,18 +16,12 @@ export const appRoutes: AppRoute[] = [
     layout: BaseLayout,
     component: lazy(() => import("../pages/Homepage")),
   },
-  {
-    exact: true,
-    path: `${routesPaths.public.detail}/:id`,
-    layout: BaseLayout,
-    component: lazy(() => import("../pages/Detail")),
-  },
-  {
-    exact: true,
-    path: routesPaths.public.about,
-    layout: BaseLayout,
-    component: lazy(() => import("../pages/About")),
-  },
+  // {
+  //   exact: true,
+  //   path: `${routesPaths.public.detail}/:id`,
+  //   layout: BaseLayout,
+  //   component: lazy(() => import("../pages/Detail")),
+  // },
   {
     exact: true,
     path: "*",
