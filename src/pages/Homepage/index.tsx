@@ -4,10 +4,10 @@ import {
   InputAdornment,
   autocompleteClasses,
 } from "@mui/material";
-import { CustomInput } from "../../components/Input";
+import { CustomInput, CustomDatePicker } from "../../components/Input";
 import { HomePageStyled } from "./index.styles";
 import { FlightTakeoff, FlightLand, PersonAdd } from "@mui/icons-material";
-import { CustomDatePicker } from "../../components/DatePicker";
+import { useTranslation } from "react-i18next";
 
 export interface HomePageProps {}
 
@@ -17,6 +17,7 @@ const HomePage = () => {
     { label: "İstanbul" },
     { label: "Ankara" },
   ];
+  const { t } = useTranslation();
 
   return (
     <HomePageStyled>
@@ -37,7 +38,11 @@ const HomePage = () => {
                 },
               }}
               renderInput={(params) => (
-                <CustomInput {...params} label="Nereden" size="small" />
+                <CustomInput
+                  {...params}
+                  label={t("widgets.searchBar.to")}
+                  size="small"
+                />
               )}
             />
           </Grid>
@@ -56,34 +61,26 @@ const HomePage = () => {
                 },
               }}
               renderInput={(params) => (
-                <CustomInput {...params} label="Nereye" size="small" />
+                <CustomInput
+                  {...params}
+                  label={t("widgets.searchBar.from")}
+                  size="small"
+                />
               )}
             />
           </Grid>
           <Grid p={2}>
-            <CustomDatePicker
-              label="Gidiş Tarihi"
-              slotProps={{
-                textField: { size: "small" },
-                openPickerButton: { size: "small" },
-              }}
-            />
+            <CustomDatePicker label={t("widgets.searchBar.startDate")} />
           </Grid>
           <Grid p={2}>
-            <CustomDatePicker
-              label="Dönüş Tarihi"
-              slotProps={{
-                textField: { size: "small" },
-                openPickerButton: { size: "small" },
-              }}
-            />
+            <CustomDatePicker label={t("widgets.searchBar.endDate")} />
           </Grid>
           <Grid p={2}>
             <CustomInput
               type="number"
               style={{ maxWidth: "156px" }}
               size="small"
-              label="Yolcu Sayısı"
+              label={t("widgets.searchBar.travellerCount")}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">

@@ -1,11 +1,16 @@
 {
-  "navigate": {
-    "home": "Heim",
-    "about": "Über uns"
+  "lang": {
+    "tr": "Türkçe",
+    "en": "English",
+    "de": "Deutsch"
   },
-  "homepage": {
-    "desc": {
-      "first": "Willkommen"
+  "widgets": {
+    "searchBar": {
+      "to": "To",
+      "from": "From",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "travellerCount": "Traveller Count"
     }
   }
 }

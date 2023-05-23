@@ -1,11 +1,16 @@
 {
-  "navigate": {
-    "home": "Anasayfa",
-    "about": "Hakkımızda"
+  "lang": {
+    "tr": "Türkçe",
+    "en": "English",
+    "de": "Deutsch"
   },
-  "homepage": {
-    "desc": {
-      "first": "Merhaba Hosgeldiniz"
+  "widgets": {
+    "searchBar": {
+      "to": "Nereden",
+      "from": "Nereye",
+      "startDate": "Gidiş Tarihi",
+      "endDate": "Dönüş Tarihi",
+      "travellerCount": "Yolcu Sayısı"
     }
   }
 }

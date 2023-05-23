@@ -9,6 +9,7 @@ import { Loading } from "../loading";
 import { Route, Routes } from "react-router-dom";
 import { appRoutes } from "../../config/routes";
 import { HomePageProps } from "../../pages/Homepage";
+import i18n, { languages } from "assets/i18n";
 
 export interface AppRoute {
   exact?: boolean;
@@ -83,18 +84,48 @@ const RouteComposer = ({ route, before, ...restProps }: RouteComposerProps) => {
   );
 };
 
-export const renderRoutes = (routes: AppRoute[]) =>
-  routes ? (
+export const renderRoutes = (routes: AppRoute[]) => {
+  const supportedLanguages = languages;
+  const defaultLanguage = i18n.language;
+
+  const parseLanguageFromURL = () => {
+    const pathParts = window.location.pathname.split("/");
+    const language = pathParts[1];
+    if (supportedLanguages.includes(language)) {
+      return language;
+    }
+    return defaultLanguage;
+  };
+
+  const redirectWithLanguagePrefix = (path: string) => {
+    const language = parseLanguageFromURL();
+    return `/${language}${path}`;
+  };
+  return routes ? (
     <Routes>
-      {routes.map((route) => {
+      <Route
+        key={routes[0].path}
+        path={"/"}
+        index={routes[0]?.exact}
+        element={
+          <RouteComposer
+            before={routes[0]?.before}
+            route={{
+              component: routes[0].component,
+              layout: routes[0].layout,
+              guard: routes[0].guard,
+              redirect: routes[0].redirect,
+              guardCondition: routes[0].guardCondition,
+              className: routes[0].className,
+            }}
+          />
+        }
+      />
+      {routes.map((route) => { 
         return (
           <Route
             key={route.path}
-            path={
-              route.path === "/" || route.path === "*"
-                ? route.path
-                : `/:locale${route.path}`
-            }
+            path={redirectWithLanguagePrefix(route.path)}
             index={route?.exact}
             element={
               <RouteComposer
@@ -114,6 +145,7 @@ export const renderRoutes = (routes: AppRoute[]) =>
       })}
     </Routes>
   ) : null;
+};
 
 function AppRoutes() {
   return <Suspense fallback={<Loading />}>{renderRoutes(appRoutes)}</Suspense>;
